@@ -1,1 +1,31 @@
 //this store's code is raw untest,just put all code you have done in it.
+
+
+//search function
+//search string temp in buffFile,if find string,take the cursor before the first letter,if not take it to the last.
+void Search( int judge, char *temp ){
+	//search location 
+	int i=0;
+	while(!feof(buffFile)){
+		//从第一个字符开始看，看能否与整个字符串对上 
+		int j=0;
+		while(temp[j]){
+			char ch = fgetc(buffFile);
+			//这个字符配对成功，下一个 
+			if(temp[j] == ch)	j++;
+			//没配对成功，过。 
+			else	break;
+		}
+		//如果指针空，说明匹配到了 
+		if(!temp[j])
+		{
+			//把指针指到i的位置，就在这里,然后结束程序 
+			fseek(buffFile,i,0);
+			return; 
+		}
+		//把指针指到下一个上 
+		fseek(buffFile,++i,0);
+	}
+	//没匹配到，光标就放在最后把 
+	return; 
+} 
