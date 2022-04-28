@@ -1,0 +1,6 @@
+//全局变量输入格式
+//定义位置：   意义：
+int ant； //定义的语句。
+
+//定义位置：   意义：缓冲文件的文件指针头
+FILE *buffFile = fopen("buffFile.txt",'w+');
