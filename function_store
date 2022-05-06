@@ -1,0 +1,76 @@
+1.display函数
+/*
+display函数
+ 
+1.输入变量，及其意义：
+ 	int penSize		笔的粗细 
+	char *font		字体格式 
+	int pointSize	字体大小 
+	char *penColor	字体颜色 
+ 2.无返回值 
+ 3.实现的功能，将 buffFile文件指针所指向文件内的内容打印出来（无法支持汉字，无法直接单行溢出） 
+ 4.需要用到的头文件："graphics.h" 
+   需要用到的全局变量： FILE *buffFile;
+ 5.待优化的功能 
+ 
+  (字体大小待改进为平凡大小)	 字体大小设置为四种：10、20、30、40 
+ （很奇怪库里的那个pointsize和呈现窗口的单位长度不对应，所以realPointSize数据为人工测试所得……） 
+ 
+  (输出待改进为兼容汉字)	现在无法正常输出缓冲文件中的汉字 
+ 
+ 6.测试函数 
+ 
+ FILE *buffFile;
+ void Main(){
+	InitGraphics();
+	buffFile = fopen("buffFile.txt","a+"); 
+	display(1,"微软雅黑",20,"Red");
+}
+ 
+*/ 
+void display(int penSize,char *font,int pointSize,char *penColor) //笔的粗细，字体格式，字体大小，字体颜色 
+{
+	
+	char ch;
+	double x = GetWindowWidth(); 
+	double y = GetWindowHeight();
+	double realPointSize = 0; //实际呈现时字体对应的长度 
+	SetPointSize(pointSize);
+	SetFont(font);
+	SetPenSize(penSize);
+	SetPenColor(penColor);
+	int row = 1; //已显示的行数 
+	int cnt = 0; //一行内的字符数 
+	char word[1000];//现在即将输入行内容 
+	
+	switch(pointSize){
+		case 10: realPointSize = 0.14; break;
+		case 20: realPointSize = 0.22; break;
+		case 30: realPointSize = 0.27; break;
+		case 40: realPointSize = 0.38; break;
+	}
+	MovePen(0,y-realPointSize);
+	memset(word, 0, sizeof(word));
+	
+	//复制数据，结束条件为光标移至文件末 
+	while(!feof(buffFile)){
+		//读取光标下一个字符 
+		ch = fgetc(buffFile);
+		//读取到换行标识 
+		if(ch == '\n'){
+			//将当前的word内内容输出，并改变row和cnt数 
+			DrawTextString(word);
+			//移动笔 
+			MovePen(0,y-realPointSize*(row+1));
+			row ++;
+			memset(word, 0, sizeof(word));
+			cnt = 0;
+		}
+		//读取到非换行 
+		else{
+			//将该值存储于word内以待输出 
+			word[cnt++] = ch;
+		}
+	} 
+	
+}
