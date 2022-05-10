@@ -4,3 +4,7 @@ int ant； //定义的语句。
 
 //定义位置：   意义：缓冲文件的文件指针头
 FILE *buffFile = fopen("buffFile.txt",'w+');
+
+//定义位置：   意义：鼠标事件选中文本的头尾指针位置（既选中的文本内容）
+int cursorBegin;
+int cursorTail;
