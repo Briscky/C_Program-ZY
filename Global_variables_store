@@ -16,3 +16,6 @@ int charCount[1000];
 //定义位置：mouseEvent（）函数所在位置   意义：输出文本的行距和间宽
 double textwidth;//两个字之间的左右距离
 double textheight;//两个字之间的上下
+
+//定义位置：   意义：剪切板文件的文件指针头
+FILE *clipBoard = fopen（“clipBoard.txt”,'w+'）;
