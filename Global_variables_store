@@ -18,4 +18,5 @@ double textwidth;//两个字之间的左右距离
 double textheight;//两个字之间的上下
 
 //定义位置：   意义：剪切板文件的文件指针头
-FILE *clipBoard = fopen（“clipBoard.txt”,'w+'）;
+FILE *clipBoard;
+//特别注意：需要自行打开关闭
