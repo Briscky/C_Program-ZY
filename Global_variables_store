@@ -12,3 +12,7 @@ int cursorTail;
 //定义位置：   意义：文本中第i行所拥有字符的个数,
 //特别注意：1.从1开始计数，即charCount[i] == 文本中第i行字符的个数 2.字符个数含末尾的/n，既单纯空行也算一个字符
 int charCount[1000];
+
+//定义位置：mouseEvent（）函数所在位置   意义：输出文本的行距和间宽
+double textwidth;//两个字之间的左右距离
+double textheight;//两个字之间的上下
