@@ -162,3 +162,46 @@ typedef struct {
 static UIState gs_UIState;
 
 */
+
+/*
+ copy函数
+ 
+ 1.无输入变量
+ 2.无返回值
+ 3.实现的功能，将指针标出的字符复制到clipBoard文件中
+ 4.需要用到的全局变量： 
+    FILE *buffFile;
+    FILE *clipBoard;
+    int cursorBegin;
+    int cursorTail;
+ 5.待优化的功能 
+ 
+ 6.测试函数 
+ FILE *buffFile;
+ FILE *clipBoard;
+ int cursorBegin;
+ int cursorTail;
+ int main(){
+    cursorBegin = 0;
+    cursorTail = 5;
+    buffFile = fopen( "buffFile.txt", 'w')
+    fputs("Hello_World!",buffFile);
+    copy();
+    return;
+ }
+
+}
+ 
+*/ 
+void copy() 
+{
+	clipBoard = fopen( "clipBoard.txt", 'w');
+    fseek( buffFile, 0, cursorBegin);
+    int length = cursorTail - cursorBegin;
+    char temp;
+    while( length){
+        ch = fgetc( buffFile);
+        fputc( ch, clipBoard);
+    }
+    return;
+}
