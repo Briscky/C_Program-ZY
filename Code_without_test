@@ -161,33 +161,6 @@ typedef struct {
 
 static UIState gs_UIState;
 
-Cut函数
- 
-1.输入变量，及其意义：
- 	//可能要用到键盘输入，暂缓 
- 2.无返回值 
- 3.实现的功能，将选中的内容在buffFile中删除 
- 4.需要用到的头文件："graphics.h" 
-   需要用到的全局变量： FILE *buffFile;
-   						FILE *clipBoard;
-   						int cursorBegin;
-   						int cursorTail;
- 5.待优化的功能 
- 
-
- 6.测试函数 
-
-}
- 
-*/ 
-void Cut() 
-{
-	//如果未选中字符串，则直接返回 
-	if(cursorBegin == cursorTail)	return;
-	//先将相关字符串复制，再删除字符串 
-	Copy();
-	Delete();
-}
 
 Paste函数
  
