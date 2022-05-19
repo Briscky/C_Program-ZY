@@ -161,39 +161,3 @@ typedef struct {
 
 static UIState gs_UIState;
 
-
-Paste函数
- 
- 1.输入变量，及其意义：
- 	//可能要用到键盘输入，暂缓 
- 2.无返回值 
- 3.实现的功能，将选中的内容在buffFile中删除 
- 4.需要用到的头文件："graphics.h" 
-   需要用到的全局变量： FILE *buffFile;
-   						FILE *clipBoard;
-   						int cursorBegin;
-   						int cursorTail;
- 5.待优化的功能 
- 
-
- 6.测试函数 
-
-}
- 
-*/ 
-void Paste() 
-{
-	Delete();
-	//打开剪切板文件
-	clipBoard = fopen("clipBoard.txt","r");
-	//把剪切板里的文件加入到buffFile中去
-	char ch;//过渡字符 
-	while(!feof(clipBoard)){
-		ch = fgetc(clipBoard);
-		if(ch == EOF)	break;//EOF说明读完了 
-		//把这个字符给buffFile读进去 
-		Write(ch); 
-	}
-	//文件用完就关好习惯
-	fclose(clipBoard); 
-}
