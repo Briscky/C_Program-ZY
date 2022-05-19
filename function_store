@@ -140,3 +140,63 @@ void display(int penSize,char *font,int pointSize,char *penColor) //笔的粗细
     charCount[j] = i;
     return j;
     }
+
+3.Copy函数
+/*
+ Copy函数
+ 
+ 1.无输入变量
+ 2.无返回值
+ 3.实现的功能，将指针标出的字符复制到clipBoard文件中
+ 4.需要用到的全局变量： 
+    FILE *buffFile;
+    FILE *clipBoard;
+    int cursorBegin;
+    int cursorTail;
+ 5.待优化的功能 
+ 
+ 6.测试函数 
+#include<stdio.h>
+#include<stdlib.h>
+FILE *buffFile;
+FILE *clipBoard;
+int cursorBegin;
+int cursorTail;
+void Copy();
+int main(){
+    buffFile = fopen("buffFile.txt","a+");
+    cursorBegin = 1;
+    cursorTail = 10;
+    //cursorTail = 1;
+    Copy();
+    return 0;
+}
+
+}
+ 
+*/ 
+
+void Copy() 
+{
+    //打开剪切板（因为定义为随用随开，保证关闭）
+	clipBoard = fopen( "clipBoard.txt", "w");
+    //先找到想开始复制的开头
+    fseek(buffFile,cursorBegin,0);
+    //这是调试出的问题（我真傻，连个fseek都不会用。。。。
+    //fseek( buffFile, 0, cursorBegin);
+    //找出需要复制的文本长度
+    int length = cursorTail - cursorBegin;
+    //这里加个判断吧，如果头尾一致的话，就当你没按
+    if(length == 0)	return;
+    //定义一个过渡字符
+    char temp;
+    //将需要的字符串读入clipBoard
+    while( length){
+        temp = fgetc( buffFile);
+        printf("%c",temp);
+        fputc( temp, clipBoard);
+        length--;
+    }
+    //大功告成
+    return;
+}
