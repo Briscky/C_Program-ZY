@@ -74,3 +74,69 @@ void display(int penSize,char *font,int pointSize,char *penColor) //笔的粗细
 	} 
 	
 }
+
+2.Count函数
+    /*
+    Count函数
+    
+    1.无输入变量
+    2.返回值：
+    类型为int   意义：文件中内容的最大行数
+    3.实现的功能，将文件buffFile中内容导入到全局变量charCount[]中，方便光标移动
+    4.需要用到的全局变量： 
+        FILE *buffFile;
+        int charCount[];
+    5.待优化的功能 
+    
+    6.测试函数 
+    #include<stdio.h>
+    #include<stdlib.h>
+    FILE *buffFile;
+    int charCount[1000];
+    int Count();
+    int main(){
+        buffFile = fopen("buffFile.txt","a+");
+        int count;
+        count = Count();
+        for(int i=1;i<=count;i++){
+            printf("%d\n",charCount[i]);
+    }
+    return 0;
+}
+    
+    */ 
+
+
+    int Count() 
+    {
+        //这个是每一行的计数个数
+        int i = 0;
+        //这个是在数行
+        int j = 1;
+        //开始数
+        fseek(buffFile,0,0);
+        //过度字符
+        char ch = 1;
+        while(!feof(buffFile)){
+            ch = fgetc(buffFile);
+            //如果字符为EOF，就说明结束了
+            if( ch == EOF){
+                charCount[j] = i;
+                return j;
+            }
+            //如果字符为\n，说明该跳转下一行了
+            else if( ch == '\n'){
+                //赋值
+                charCount[j] = i;
+                //计数清零
+                i = 0;
+                //行数跳转下一个
+                j++;
+            }
+            //其他情况计数+1
+            else    i++;
+        }
+    //如果因为读取到文件末尾了，也说明结束了
+    charCount[j] = i;
+    return j;
+    }
