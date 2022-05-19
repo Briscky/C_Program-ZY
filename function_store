@@ -195,7 +195,6 @@ void Copy()
     //将需要的字符串读入clipBoard
     while( length){
         temp = fgetc( buffFile);
-        printf("%c",temp);
         fputc( temp, clipBoard);
         length--;
     }
